@@ -26,13 +26,30 @@ public partial class MainWindow : Gtk.Window
 		};
 
         refreshAction.Activated += delegate {
-            listStore.Clear();
             fillListStore(listStore);
+        };
+
+        deleteAction.Activated += delegate {
+            MessageDialog messageDialog = new MessageDialog(
+                this,
+                DialogFlags.Modal,
+                MessageType.Question,
+                ButtonsType.YesNo,
+                "¿Quieres eliminar el registro?"
+            );
+            ResponseType response = (ResponseType)messageDialog.Run();
+            messageDialog.Destroy();
+            if (response == ResponseType.Yes) {
+                TreeIter treeIter;
+                treeView.Selection.GetSelected(out treeIter);
+
+                Console.WriteLine("treeIter= " + TreeIter);
         };
 
 	}
 
     private void fillListStore(ListStore listStore){
+        listStore.Clear();
         IDbCommand dbCommand = App.Instance.Connection.CreateCommand();
         dbCommand.CommandText = "select * from categoria order by id";
         IDataReader dataReader = dbCommand.ExecuteReader();

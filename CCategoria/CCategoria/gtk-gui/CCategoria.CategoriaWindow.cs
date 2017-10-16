@@ -8,6 +8,10 @@ namespace CCategoria
 
 		private global::Gtk.Action saveAction;
 
+		private global::Gtk.Action Action;
+
+		private global::Gtk.Action Action1;
+
 		private global::Gtk.VBox vbox1;
 
 		private global::Gtk.Toolbar entry2;
@@ -25,7 +29,14 @@ namespace CCategoria
 			this.UIManager = new global::Gtk.UIManager();
 			global::Gtk.ActionGroup w1 = new global::Gtk.ActionGroup("Default");
 			this.saveAction = new global::Gtk.Action("saveAction", null, null, "gtk-save");
+			this.saveAction.ShortLabel = "";
 			w1.Add(this.saveAction, null);
+			this.Action = new global::Gtk.Action("Action", null, null, null);
+			this.Action.ShortLabel = "";
+			w1.Add(this.Action, null);
+			this.Action1 = new global::Gtk.Action("Action1", null, null, null);
+			this.Action1.ShortLabel = "";
+			w1.Add(this.Action1, null);
 			this.UIManager.InsertActionGroup(w1, 0);
 			this.AddAccelGroup(this.UIManager.AccelGroup);
 			this.Name = "CCategoria.CategoriaWindow";
@@ -36,8 +47,8 @@ namespace CCategoria
 			this.vbox1.Name = "vbox1";
 			this.vbox1.Spacing = 6;
 			// Container child vbox1.Gtk.Box+BoxChild
-			this.UIManager.AddUiFromString("<ui><toolbar name=\'entry2\'><toolitem name=\'saveAction\' action=\'saveAction\'/></too" +
-					"lbar></ui>");
+			this.UIManager.AddUiFromString("<ui><toolbar name=\'entry2\'><toolitem name=\'saveAction\' action=\'saveAction\'/><tool" +
+					"item/><toolitem name=\'Action1\' action=\'Action1\'/></toolbar></ui>");
 			this.entry2 = ((global::Gtk.Toolbar)(this.UIManager.GetWidget("/entry2")));
 			this.entry2.Name = "entry2";
 			this.entry2.ShowArrow = false;
