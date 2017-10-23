@@ -1,6 +1,5 @@
 ﻿using Gtk;
 using MySql.Data.MySqlClient;
-using System;
 using System.Data;
 using CCategoria;
 
@@ -30,11 +29,18 @@ public partial class MainWindow : Gtk.Window
         {
             bool hasSelected = treeView.Selection.CountSelectedRows() > 0;
             deleteAction.Sensitive = hasSelected;
+            editAction.Sensitive = hasSelected;
         };
 
         newAction.Activated += delegate
         {
             new CategoriaWindow();
+        };
+
+        editAction.Activated += delegate
+        {
+            object id = getId();
+            new CategoriaWindow(id);
         };
 
         refreshAction.Activated += delegate
