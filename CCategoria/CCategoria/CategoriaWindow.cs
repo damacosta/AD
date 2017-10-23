@@ -2,6 +2,7 @@
 using System.Data;
 using MySql.Data.MySqlClient;
 
+using Serpis.Ad;
 
 namespace CCategoria{
     

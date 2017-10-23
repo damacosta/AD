@@ -29,13 +29,10 @@ namespace CCategoria
 			this.UIManager = new global::Gtk.UIManager();
 			global::Gtk.ActionGroup w1 = new global::Gtk.ActionGroup("Default");
 			this.saveAction = new global::Gtk.Action("saveAction", null, null, "gtk-save");
-			this.saveAction.ShortLabel = "";
 			w1.Add(this.saveAction, null);
 			this.Action = new global::Gtk.Action("Action", null, null, null);
-			this.Action.ShortLabel = "";
 			w1.Add(this.Action, null);
 			this.Action1 = new global::Gtk.Action("Action1", null, null, null);
-			this.Action1.ShortLabel = "";
 			w1.Add(this.Action1, null);
 			this.UIManager.InsertActionGroup(w1, 0);
 			this.AddAccelGroup(this.UIManager.AccelGroup);

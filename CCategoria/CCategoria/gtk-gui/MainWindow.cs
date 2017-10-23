@@ -26,13 +26,10 @@ public partial class MainWindow
 		this.UIManager = new global::Gtk.UIManager();
 		global::Gtk.ActionGroup w1 = new global::Gtk.ActionGroup("Default");
 		this.newAction = new global::Gtk.Action("newAction", null, null, "gtk-new");
-		this.newAction.ShortLabel = "";
 		w1.Add(this.newAction, null);
 		this.refreshAction = new global::Gtk.Action("refreshAction", null, null, "gtk-refresh");
-		this.refreshAction.ShortLabel = "";
 		w1.Add(this.refreshAction, null);
 		this.deleteAction = new global::Gtk.Action("deleteAction", null, null, "gtk-delete");
-		this.deleteAction.ShortLabel = "";
 		w1.Add(this.deleteAction, null);
 		this.UIManager.InsertActionGroup(w1, 0);
 		this.AddAccelGroup(this.UIManager.AccelGroup);
