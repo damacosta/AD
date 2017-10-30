@@ -54,14 +54,13 @@ public partial class MainWindow : Gtk.Window
             if (WindowHelper.Confirm(this, "¿Quieres eliminar el registro?"))
             {
                 object id = getId();
-                IDbCommand dbCommand = App.Instance.Connection.CreateCommand();
-                dbCommand.CommandText = "delete from categoria where id = @id";
-                DbCommandHelper.AddParameter(dbCommand, "id", id);
-                dbCommand.ExecuteNonQuery();
+                CategoriaDao.Delete(id);
             }
 
-
         };
+
+
+
     }
 
     private object getId()
