@@ -1,7 +1,5 @@
 ﻿using System;
 
-using System;
-
 using Gtk;
 using MySql.Data.MySqlClient;
 using System.Data;
@@ -15,7 +13,7 @@ namespace CCategoria
         }
 
         private long id;
-        private string nombre;
+        private string nombre = "";
 
         public long Id {
             get { return id; }
