@@ -24,10 +24,6 @@ public partial class MainWindow : Gtk.Window
 			bool hasSelected = treeView.Selection.CountSelectedRows() > 0;
 			deleteAction.Sensitive = hasSelected;
 			editAction.Sensitive = hasSelected;
-			//if (treeView.Selection.CountSelectedRows() > 0)
-			//    deleteAction.Sensitive = true;
-			//else
-			//deleteAction.Sensitive = false;
 		};
 
 		newAction.Activated += delegate {
@@ -36,9 +32,9 @@ public partial class MainWindow : Gtk.Window
 		};
 
 		editAction.Activated += delegate {
-			object id = getId();
-			Categoria categoria = CategoriaDao.Load(id);
-			new CategoriaWindow(categoria);
+            object id = TreeViewHelper.getId(treeView);
+            Categoria categoria = CategoriaDao.Load(id);
+            new CategoriaWindow(categoria);
 		};
 
 		refreshAction.Activated += delegate {
@@ -48,7 +44,7 @@ public partial class MainWindow : Gtk.Window
 		deleteAction.Activated += delegate {
 			if (WindowHelper.Confirm(this, "¿Quieres eliminar el registro?"))
 			{
-				object id = getId();
+                object id = TreeViewHelper.getId(treeView);
 				CategoriaDao.Delete(id);
 			}
 
@@ -56,12 +52,11 @@ public partial class MainWindow : Gtk.Window
 		};
 	}
 
-	private object getId()
-	{
-		TreeIter treeIter;
-		treeView.Selection.GetSelected(out treeIter);
-		return treeView.Model.GetValue(treeIter, 0);
-	}
+	//private object getId(){
+	//	TreeIter treeIter;
+	//	treeView.Selection.GetSelected(out treeIter);
+	//	return treeView.Model.GetValue(treeIter, 0);
+	//}
 
 	private void fillListStore(ListStore listStore)
 	{

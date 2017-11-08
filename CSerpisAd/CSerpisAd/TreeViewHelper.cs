@@ -13,6 +13,7 @@ namespace Serpis.Ad
 				return;
 			int fieldCount = dataReader.FieldCount;
 			Type[] types = new Type[fieldCount];
+
 			for (int index = 0; index < fieldCount; index++)
 			{
 				treeView.AppendColumn(dataReader.GetName(index),
@@ -20,6 +21,7 @@ namespace Serpis.Ad
 				);
 				types[index] = typeof(string);
 			}
+
 			ListStore listStore = new ListStore(types);
 			treeView.Model = listStore;
 		}
@@ -46,6 +48,12 @@ namespace Serpis.Ad
 			ListStore listStore = (ListStore)treeView.Model;
 			fillListStore(listStore, dataReader);
 			dataReader.Close();
+		}
+
+        public static object getId(TreeView treeView){
+			TreeIter treeIter;
+			treeView.Selection.GetSelected(out treeIter);
+			return treeView.Model.GetValue(treeIter, 0);
 		}
 	}
 }
