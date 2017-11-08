@@ -13,6 +13,8 @@ public partial class MainWindow : Gtk.Window
         Title = "Articulo";
         App.Instance.Connection = new MySqlConnection("server=localhost;database=dbprueba;user=root;password=sistemas");
         App.Instance.Connection.Open();
+
+        TreeViewHelper.Fill(treeView, "select * from Articulo");
     }
 
     protected void OnDeleteEvent(object sender, DeleteEventArgs a)
