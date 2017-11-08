@@ -58,16 +58,16 @@ public partial class MainWindow : Gtk.Window
 	//	return treeView.Model.GetValue(treeIter, 0);
 	//}
 
-	private void fillListStore(ListStore listStore)
-	{
-		listStore.Clear();
-		IDbCommand dbCommnand = App.Instance.Connection.CreateCommand();
-		dbCommnand.CommandText = "select * from categoria order by id";
-		IDataReader dataReader = dbCommnand.ExecuteReader();
-		while (dataReader.Read())
-			listStore.AppendValues(dataReader["id"].ToString(), dataReader["nombre"]);
-		dataReader.Close();
-	}
+	//private void fillListStore(ListStore listStore)
+	//{
+	//	listStore.Clear();
+	//	IDbCommand dbCommnand = App.Instance.Connection.CreateCommand();
+	//	dbCommnand.CommandText = "select * from categoria order by id";
+	//	IDataReader dataReader = dbCommnand.ExecuteReader();
+	//	while (dataReader.Read())
+	//		listStore.AppendValues(dataReader["id"].ToString(), dataReader["nombre"]);
+	//	dataReader.Close();
+	//}
 
 	protected void OnDeleteEvent(object sender, DeleteEventArgs a)
 	{
