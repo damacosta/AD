@@ -1,7 +1,7 @@
-﻿using System;
+﻿
 using MySql.Data.MySqlClient;
 using Gtk;
-using System.Data;
+
 using Serpis.Ad;
 using CArticulo;
 
