@@ -19,8 +19,6 @@ public class PruebaMySql {
 	
 		Statement stmt = connection.createStatement();
 
-	    Class.forName("com.mysql.jdbc.Driver");
-
 	    sql = "SELECT * FROM categoria";
 	    ResultSet rs = stmt.executeQuery(sql);
 	    
