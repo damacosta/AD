@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class Menu {
 	public static void Menu() throws SQLException {
+
 		System.out.println("Bienvenido al gestor de Artículos \n"
 				+ "Selecciona la opción a realizar\n"
 				+ "0 Salir \n"
@@ -23,9 +24,11 @@ public class Menu {
 	            	System.out.println("Saliendo del programa...");
 	                     break;
 	            case 1: //Nuevo
+	            	ArticuloDao.Nuevo();
 	            	;
 	                     break;
 	            case 2: //Editar
+	            	ArticuloDao.Editar();
 	            	;
 	                     break;
 	            case 3: //Eliminar
@@ -42,5 +45,15 @@ public class Menu {
 	                     break;
 	        }
 	    }
-	
+	public static void VolverMenu() throws SQLException {
+		System.out.println("¿Quieres volver al menú? (Si/No)");
+		Scanner scn = new Scanner(System.in);
+		String respuesta = scn.nextLine().toLowerCase();
+		if (respuesta.equals("si")) {
+			Menu.Menu();
+		}
+		else
+			System.out.println("Programa acabado");
+			System.exit(0);
+	}
 }
