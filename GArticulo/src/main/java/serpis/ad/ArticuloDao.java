@@ -23,8 +23,12 @@ public class ArticuloDao {
 		BigDecimal precio = scn.nextBigDecimal();
 		System.out.println("Dime la categoría del artículo que desea insertar");
 		long categoria = scn.nextLong();
-		String sql = "INSERT INTO articulo (nombre, precio, categoria) VALUES ('" + nombre + "', '" + precio + "', '" + categoria + "')";
-		PreparedStatement pstmt = connection.prepareStatement(sql);
+		PreparedStatement pstmt = connection.prepareStatement("INSERT INTO articulo (nombre, precio, categoria) VALUES (?,?,?)");
+		
+		pstmt.setString(1,nombre);
+    	pstmt.setBigDecimal(2, precio);
+    	pstmt.setLong(3, categoria);
+	
 	    pstmt.executeUpdate();
 	    pstmt.close();
 	    connection.close();
@@ -39,7 +43,7 @@ public class ArticuloDao {
 		Scanner scn = new Scanner(System.in);
 		System.out.println("Dime la ID del artículo que desea editar: ");
 		long id = scn.nextLong();
-		String sql = "SELECT * FROM articulo WHERE id =" + id;
+		String sql = "SELECT * FROM articulo WHERE id = " + id;
 	    ResultSet rs = stmt.executeQuery(sql);
 	    
 		while(rs.next()){
@@ -53,37 +57,41 @@ public class ArticuloDao {
 	    String edit = scn.nextLine().toLowerCase();
 	    
 	    if (edit.equals("nombre")) {
+	    	PreparedStatement pstmt = connection.prepareStatement("UPDATE articulo SET nombre = ? WHERE id = ? ");
 	    	System.out.println("¿Qué nombre desea poner?");
 	    	String newNombre = scn.nextLine();
 	    	
-			String entryNombre = "UPDATE articulo SET nombre = '" + newNombre + "' WHERE id = " + id;
-	    	PreparedStatement pstmt = connection.prepareStatement(entryNombre);
+	    	pstmt.setString(1,newNombre);
+	    	pstmt.setLong(2, id);
+	    	
 	    	pstmt.executeUpdate();
 	    	pstmt.close();
-	    	Listar();
 		} else if (edit.equals("precio")) {
-			System.out.println("¿Qué precio desea poner?");
+			PreparedStatement pstmt = connection.prepareStatement("UPDATE articulo SET precio = ? WHERE id = ? ");
+	    	System.out.println("¿Qué precio desea poner?");
 	    	BigDecimal newPrecio = scn.nextBigDecimal();
 	    	
-			String entryPrecio = "UPDATE articulo SET precio = '" + newPrecio + "' WHERE id = " + id;
-	    	PreparedStatement pstmt = connection.prepareStatement(entryPrecio);
+	    	pstmt.setBigDecimal(1,newPrecio);
+	    	pstmt.setLong(2, id);
+	    	
 	    	pstmt.executeUpdate();
 	    	pstmt.close();
-	    	Listar();
 		} else if (edit.equals("categoria")) {
-			System.out.println("¿Qué categoría desea poner?");
+			PreparedStatement pstmt = connection.prepareStatement("UPDATE articulo SET categoria = ? WHERE id = ? ");
+	    	System.out.println("¿Qué categoria desea poner?");
 	    	long newCategoria = scn.nextLong();
 	    	
-			String entryCategoria = "UPDATE articulo SET categoria = '" + newCategoria + "' WHERE id = " + id;
-	    	PreparedStatement pstmt = connection.prepareStatement(entryCategoria);
+	    	pstmt.setLong(1,newCategoria);
+	    	pstmt.setLong(2, id);
+	    	
 	    	pstmt.executeUpdate();
 	    	pstmt.close();
-	    	Listar();
 		}
 		rs.close();
 		stmt.close();
       	connection.close();
       	
+      	Listar();
       	Menu.VolverMenu();
 	}
 	
@@ -95,9 +103,9 @@ public class ArticuloDao {
 		System.out.println("Dime la ID del artículo que desea eliminar: ");
 		long id = scn.nextLong();
 		
-		String sql = "DELETE FROM articulo where ID = " + id;
-		PreparedStatement pstmt = connection.prepareStatement(sql);
+		PreparedStatement pstmt = connection.prepareStatement("DELETE FROM articulo where ID = ?");
 		
+		pstmt.setLong(1,id);
 	    pstmt.executeUpdate();
 	    
 	    System.out.println("Articulo eliminado");
