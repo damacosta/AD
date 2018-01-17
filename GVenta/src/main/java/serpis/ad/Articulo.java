@@ -9,9 +9,12 @@ public class Articulo {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-	private long categoria;
 	private String nombre;
 	private BigDecimal precio;
+	@ManyToOne
+	@JoinColumn(name="categoria")
+	private Categoria categoria;
+
 	
 	public long getId() {
 		return id;
@@ -20,10 +23,10 @@ public class Articulo {
 		this.id = id;
 	}
 	
-	public long getCategoria() {
+	public Categoria getCategoria() {
 		return categoria;
 	}
-	public void setCategoria(long categoria) {
+	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
 	
@@ -43,7 +46,7 @@ public class Articulo {
 	
 	@Override
 	public String toString() {
-		return String.format("[%s] %s %s€ Categoria %s", id, nombre, precio, categoria);
+		return String.format("[%s] %s %s€ (%s)", id, nombre, precio, categoria);
 
 	}
 
