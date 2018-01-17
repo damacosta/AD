@@ -18,12 +18,11 @@ public class Pedido {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-	private Date fecha;
-	private BigDecimal importe;
-	
 	@ManyToOne
 	@JoinColumn(name="cliente")
 	private Cliente cliente;
+	private Date fecha;
+	private BigDecimal importe;
 	
 	public long getId() {
 		return id;
@@ -52,7 +51,7 @@ public class Pedido {
 
 	@Override
 	public String toString() {
-		return String.format("[%s] %s", id, cliente, fecha, importe);
+		return String.format("[%s] %s %s %s", id, cliente, fecha, importe);
 
 	}
 	

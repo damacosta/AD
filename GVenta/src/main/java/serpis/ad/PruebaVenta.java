@@ -23,14 +23,14 @@ private static EntityManagerFactory entityManagerFactory;
 		
 		//showCategorias();
 		//showArticulos();
-		showCliente();
+		//showCliente();
+		showPedidos();
+
 		
 		
 		
 		//showCliente();
-		//newPedido();
-		//showPedidos();
-		
+		//newPedido();		
 		entityManagerFactory.close();
 		
 
@@ -66,15 +66,15 @@ private static EntityManagerFactory entityManagerFactory;
 	entityManager.getTransaction().commit();
 	}
 	
-	/* private static void showPedidos() {
+	private static void showPedidos() {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		entityManager.getTransaction().begin();
 		List<Pedido> pedidos = entityManager
-				.createQuery("from pedido order by id", Pedido.class).getResultList();
+				.createQuery("from Pedido order by id", Pedido.class).getResultList();
 		for (Pedido pedido : pedidos)
 			System.out.println(pedido);
 		entityManager.getTransaction().commit();
-	} */
+	} 
 	
 	/*
 	private static void newPedido() {
