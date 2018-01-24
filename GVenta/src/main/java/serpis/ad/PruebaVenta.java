@@ -4,10 +4,13 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.Random;
+
 
 import org.w3c.dom.events.Event;
 import org.jboss.*;
@@ -22,9 +25,10 @@ private static EntityManagerFactory entityManagerFactory;
 				Persistence.createEntityManagerFactory("serpis.ad.gventa");
 		
 		//showCategorias();
-		//showArticulos();
+		showArticulos();
 		//showCliente();
-		showPedidos();
+		//showPedidos();
+		//newArticulo();
 
 		
 		
@@ -56,6 +60,21 @@ private static EntityManagerFactory entityManagerFactory;
 		entityManager.getTransaction().commit();
 	}
 	
+	
+	private static void newArticulo() {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		entityManager.getTransaction().begin();
+		Categoria categoria = entityManager.getReference(Categoria.class, 1L);
+		Articulo articulo = new Articulo();
+		articulo.setNombre("Nuevo " + new Date());
+		articulo.setPrecio(new BigDecimal(6));
+		articulo.setCategoria(categoria);
+		entityManager.persist(articulo);
+		System.out.println("Creado " + articulo);
+		entityManager.getTransaction().commit();
+
+	}
+	
 	private static void showCliente() {
 	EntityManager entityManager = entityManagerFactory.createEntityManager();
 	entityManager.getTransaction().begin();
@@ -75,6 +94,9 @@ private static EntityManagerFactory entityManagerFactory;
 			System.out.println(pedido);
 		entityManager.getTransaction().commit();
 	} 
+	
+	
+	
 	
 	/*
 	private static void newPedido() {
