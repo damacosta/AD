@@ -25,10 +25,12 @@ private static EntityManagerFactory entityManagerFactory;
 				Persistence.createEntityManagerFactory("serpis.ad.gventa");
 		
 		//showCategorias();
-		showArticulos();
+		//showArticulos();
 		//showCliente();
 		//showPedidos();
 		//newArticulo();
+		newPedido();
+		showPedidos();
 
 		
 		
@@ -94,6 +96,26 @@ private static EntityManagerFactory entityManagerFactory;
 			System.out.println(pedido);
 		entityManager.getTransaction().commit();
 	} 
+	
+	private static void newPedido() {
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		entityManager.getTransaction().begin();
+		
+		
+		Pedido pedido = new Pedido();
+		Cliente cliente = entityManager.getReference(Cliente.class, 1L);
+		pedido.setCliente(cliente);
+		Pedidolinea pedidolinea1 = new Pedidolinea();
+		
+		pedido.getPedidoLineas().add(pedidolinea1);
+		pedidolinea1.setPedido(pedido);
+		Articulo articulo = entityManager.getReference(Articulo.class, 1L);
+		pedidolinea1.setArticulo(articulo);
+		
+		entityManager.persist(pedido);
+		entityManager.getTransaction().commit();
+
+	}
 	
 	
 	

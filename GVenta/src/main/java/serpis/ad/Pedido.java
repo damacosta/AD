@@ -1,6 +1,11 @@
 package serpis.ad;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -11,6 +16,7 @@ import javax.persistence.OneToMany;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Date;
+import java.util.List;
 
 
 @Entity
@@ -18,41 +24,31 @@ public class Pedido {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long id;
-	@ManyToOne
-	@JoinColumn(name="cliente")
-	private Cliente cliente;
-	private Date fecha;
-	private BigDecimal importe;
 	
-	public long getId() {
-		return id;
-	}
 	public void setId(long id) {
 		this.id = id;
 	}
-	public Cliente getCliente() {
-		return cliente;
-	}
+	
+	@ManyToOne
+	@JoinColumn(name="cliente")
+	private Cliente cliente;
+	private Calendar fecha = Calendar.getInstance(); //now
+	private BigDecimal importe;
+
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	public Date getFecha() {
-		return fecha;
-	}
-	public void setFecha(Date fecha) {
-		this.fecha = fecha;
-	}
-	public BigDecimal getImporte() {
-		return importe;
-	}
-	public void setImporte(BigDecimal importe) {
-		this.importe = importe;
-	}
 
-	@Override
-	public String toString() {
-		return String.format("[%s] %s %s %s", id, cliente, fecha, importe);
-
+	@OneToMany(mappedBy="pedido", cascade=CascadeType.ALL, orphanRemoval=true)
+	
+	private List<Pedidolinea> pedidoLineas = new ArrayList<>();
+	
+	public List<Pedidolinea> getPedidoLineas() {
+		return pedidoLineas;
 	}
 	
+	@Override
+	public String toString() {
+		return String.format("[%s] %s %s %s", id, cliente.getNombre(), fecha.getTime(), importe);
+	}
 }
